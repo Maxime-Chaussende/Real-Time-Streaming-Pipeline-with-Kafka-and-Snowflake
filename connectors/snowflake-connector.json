@@ -1,0 +1,22 @@
+{
+    "name": "snowflake-crypto-sink",
+    "config": {
+        "connector.class": "com.snowflake.kafka.connector.SnowflakeStreamingSinkConnector",
+        "tasks.max": "1",
+        "topics": "crypto-prices",
+        "snowflake.url.name": "lfgvsos-ur44106.snowflakecomputing.com:443",
+        "snowflake.user.name": "KAFKA_USER",
+        "snowflake.role.name": "KAFKA_CONNECTOR_ROLE",
+        "snowflake.warehouse.name": "CRYPTO_WH",
+        "snowflake.private.key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDq+YbUUqWw4xL+9JZ+2ggZXJ3ZCBQBFHIPWa1+OdFowxCSirE9a9MRuzvnfkESdnEiNdvrb3D1HU1JQZk2wRVjMdeIVFHVPAu4JRVLEg1UdyFcfTBsF2wqMtFb1KpFHca3Sv+KEuRafn/3SeXch9jJf7oa/s2jQQAd8BYrPAgAjE4OAma/m8bQGnfG8VMhz/Kr65lw3D978tNqLniWFmuSNuiuupts8oP9cXoZFr0Q4UXtEnwcX8BG+4AqKwJb7VlpZ7jt9HpIoiVnOlsfDQxSMrjbtt9c07XpwkGuiZcYUNNFQI1bDcB6W3sVwy8lEsjMOZdKPKAnaWCSzBgra0o1AgMBAAECggEAJJMMepYWtk7SER9PIZWcdx4kb7jDLFvbWSpTR/eF8fGS7cxqxC25X+Qt8d2EEXSgLXwGrEHfajfSZNmyGIS7aIJEkzLUvgUnqdUT2GiJ7KDSb4wI8no+2t6oGcwjaLi2yqcA2aQRKUjRcFNvVQFMLCkWdcc9iPDALOjG+pnQgQ0JaoRtLZrQRuMOupQmAsYrNYrEGYT9GMmWihJ+dB+TwprCeo4FVHSgLhfppPGfOhCAh37qK72ivThJZOH8ISzIiojmVQ87cxPQ2AeC3REPpGMzfJR4OByFRnes8VVS8M+ON58wgj3RzRa8KVbZ4jqDMz8RZcbZY0ktWHFQRlw4QQKBgQD3BYPMI1dTMf6zawo8GD9aIW9AnroJCNj63RtW1hOeFuy1Bgln6sKP9kzV8F5VXl6A/nlTZTHyPqQbyK8gf7Dax/1CoU49Th0pmgArEIGNu9gHam3Vumphfsl3Yi3vqWbIJy7IuPTP6GY3DxLkSha9cDOqXD8s/XKzq7bIlnExEQKBgQDzg+smZFrKJ5lHl8ioy1+cFjGFW7sBE7IK2eQ3CmsnKyv1o8+lIR5lPblDi3CNWTpA1DYwwTjVtygSUGJihXU+LVZ22j/iuiSEptjlFPI3znjPnOcLYGQ5xENdLraky3q3/xdcc1x4ilDIdCFROkmhD4Zsfo8515xdnDTjYMQG5QKBgGCcp4+Pwvem9hb2JmqakSyPJxP/AIPIEhULpUWxNLr//FRQqB0clDv5+NMzz7FT12JcJNeZHI/CMC0tsFDloCXxUfxdWlxf0MgUkzxEmGb2sOc1mP+eiTzYebNXkt/JQYnGyWV38UfffRrLqnffAkXVPF/E9HCEL/hVkIejT2IBAoGATl4e+B0FxtcVkh+72O6SV2YhC7zoosEW5D0ZH8l/kHxpSkUslwTghk5l5+HhF+wmPiTNR8V3J/gosjQiZXhzsc3fbKJyOuISzInxdU/XX7RX1uC0zkl4F8scrslQyBof5UT33K3XjYdd1hThgAWVGnsnlJTqPQAxd0LFFoPWsi0CgYBP9KjsUNYHyTxNYyaxfGDaZH7/W/v+DXbcv+iRBeHDsMf4BJ0gMmpgoa+0xwBrd8Gywprc2hAmCOeXK/FqwMfCQd59Gt0WjKPJwB6VUO2WjSfJ6UAv3Yq8Mgii64WZXvW+aSNB+mpZKoRjryu67ELkzKgQBKrlkPZJcl5bMnh20g==\n-----END PRIVATE KEY-----\n",
+        "snowflake.database.name": "CRYPTO_PIPELINE",
+        "snowflake.schema.name": "RAW",
+        "snowflake.topic2table.map": "crypto-prices:CRYPTO_PRICES",
+        "buffer.count.records": "100",
+        "buffer.flush.time": "10",
+        "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "value.converter.schemas.enable": "false",
+        "snowflake.streaming.validate.compatibility.with.classic": "false"
+    }
+}
