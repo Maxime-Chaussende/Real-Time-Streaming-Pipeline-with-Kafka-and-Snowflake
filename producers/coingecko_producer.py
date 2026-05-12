@@ -14,6 +14,7 @@ API_KEY = os.getenv("COINGECKO_API_KEY")
 BASE_URL = "https://api.coingecko.com/api/v3"
 KAFKA_TOPIC = "crypto-prices"
 POLL_INTERVAL_SECONDS = 300 #5 minutes
+KAFKA_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS")
 
 def fetch_markets():
 
@@ -66,7 +67,7 @@ def clean_coin(raw):
 def publish_to_kafka(coins):
 
     #Kafka Producer Initialization 
-    conf = {'bootstrap.servers': 'localhost:9092',
+    conf = {'bootstrap.servers': KAFKA_SERVERS,
         'client.id': socket.gethostname()}
 
     producer = Producer(conf)
