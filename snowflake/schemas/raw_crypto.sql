@@ -1,0 +1,3 @@
+-- Table CRYPTO_PRICES is created automatically by Snowflake Kafka Connector
+-- when the first message is received from the crypto-prices topic .
+-- Schéma auto-détected by SnowflakeStreamingSinkConnector v4.x (schema evolution).
