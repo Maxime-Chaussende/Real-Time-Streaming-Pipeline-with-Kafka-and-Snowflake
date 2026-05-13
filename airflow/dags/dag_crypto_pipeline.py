@@ -2,9 +2,8 @@ from datetime import datetime, timedelta
 from airflow.sdk import DAG
 from airflow.providers.standard.operators.python import PythonOperator
 from producers.coingecko_producer import fetch_markets, clean_coin, publish_to_kafka
-import snowflake.connector
+from utils.snowflake_connection import get_snowflake_connection
 import os
-from cryptography.hazmat.primitives import serialization
 
 def fetch_and_publish():
     coins = fetch_markets()
@@ -14,33 +13,9 @@ def fetch_and_publish():
     print(f"Published {len(coins)} coins to Kafka")
 
 def verify_snowflake():
-     # 1. Lire la clé privée
-    private_key_path = os.getenv("SNOWFLAKE_PRIVATE_KEY_PATH")
-    with open(private_key_path, "rb") as f:
-        private_key = serialization.load_pem_private_key(
-            f.read(),
-            password=None
-        )
-    
-    # 2. Sérialiser la clé pour snowflake-connector
-    private_key_bytes = private_key.private_bytes(
-        encoding=serialization.Encoding.DER,
-        format=serialization.PrivateFormat.PKCS8,
-        encryption_algorithm=serialization.NoEncryption()
-    )
 
-    print(f"Type of private_key_bytes: {type(private_key_bytes)}")
-    print(f"private_key_path: {private_key_path}")
 
-    # 3. Se connecter à Snowflake
-    conn = snowflake.connector.connect(
-        account=os.getenv("SNOWFLAKE_ACCOUNT"),
-        user=os.getenv("SNOWFLAKE_USER"),
-        private_key=private_key_bytes,
-        database=os.getenv("SNOWFLAKE_DATABASE"),
-        schema=os.getenv("SNOWFLAKE_SCHEMA"),
-        warehouse=os.getenv("SNOWFLAKE_WAREHOUSE"),
-    )
+    conn = get_snowflake_connection()
 
     # 4. Vérifier les données récentes
     cursor = conn.cursor()
